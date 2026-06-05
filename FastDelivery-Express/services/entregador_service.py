@@ -1,52 +1,30 @@
-from modelos.pedido import Pedido
+from modelos.entregador import Entregador
 
 
-class PedidoService:
-    """
-    Responsável pelo gerenciamento dos pedidos.
-    """
+class EntregadorService:
 
     def __init__(self):
-        self.__pedidos = []
+        self.__entregadores = []
 
-    def criar_pedido(
-        self,
-        codigo,
-        cliente,
-        peso,
-        distancia,
-        tipo_entrega
-    ):
-        pedido = Pedido(
-            codigo,
-            cliente,
-            peso,
-            distancia,
-            tipo_entrega
+    def cadastrar_entregador(self, nome, veiculo, cnh):
+
+        entregador = Entregador(
+            nome,
+            veiculo,
+            cnh
         )
 
-        self.__pedidos.append(pedido)
+        self.__entregadores.append(entregador)
 
-        return pedido
+        return entregador
 
-    def listar_pedidos(self):
-        return self.__pedidos
+    def listar_entregadores(self):
+        return self.__entregadores
 
-    def buscar_pedido(self, codigo):
+    def buscar_entregador_por_cnh(self, cnh):
 
-        for pedido in self.__pedidos:
-            if pedido.codigo == codigo:
-                return pedido
+        for entregador in self.__entregadores:
+            if entregador.cnh == cnh:
+                return entregador
 
         return None
-
-    def atualizar_status(self, codigo, novo_status):
-
-        pedido = self.buscar_pedido(codigo)
-
-        if pedido:
-            pedido.atualizar_status(novo_status)
-            return True
-
-        return False
-    
